@@ -7,17 +7,17 @@ def Alice():
     msg = "Alice starts the Key Exchange\n"
     print(msg)
     time.sleep(2)
-    sharedPrime = genPrime(4)
-    sharedModulo = random.randint(2,sharedPrime)
+    sharedPrime = genPrime(40)
+    sharedModulo = random.randint(2,sharedPrime-1)
     print("Alice sends - \nPrime to be used ",sharedPrime," Modulo - ",sharedModulo,"\n")
     sharedData.append(sharedPrime)
     sharedData.append(sharedModulo)
     time.sleep(2)
-    privateKey = random.randint(2,sharedPrime)
-    msg = 'Alice calculates private key - '+str(privateKey)+'\n'
+    privateKey = random.randint(2,sharedPrime-1)
+    msg = 'Alice calculates secret integer - '+str(privateKey)+'\n'
     print(msg)
     publicKey = pow(sharedData[0],privateKey,sharedData[1])
-    msg = 'Alice calculates and shares Public Key - '+str(publicKey)+'\n'
+    msg = 'Alice calculates and shares generated Key - '+str(publicKey)+'\n'
     print(msg)
     sharedData.append(publicKey)
     time.sleep(2)
@@ -27,9 +27,10 @@ def Alice():
         bobpub = sharedData[3]
     else :
         bobpub = sharedData[2]
-    msg = 'Alice receives Bobs public key '+str(bobpub)+'\n'
+    msg = 'Alice receives Bobs generated key '+str(bobpub)+'\n'
     print(msg)
-    sharedKey = pow(privateKey,bobpub,sharedData[1])
+    time.sleep(1)
+    sharedKey = pow(bobpub,privateKey,sharedData[1])
     msg = 'Alice calculates shared key '+str(sharedKey)+'\n'
     print(msg)
 
@@ -58,11 +59,11 @@ def Bob():
     msg = 'Bob receives-\n'+str(sharedData[0])+' '+str(sharedData[1])+'\n'
     print(msg)
     time.sleep(2)
-    privateKey = random.randint(2,sharedData[0])
-    msg = 'Bob calculates private key - '+str(privateKey)+'\n'
+    privateKey = random.randint(2,sharedData[0]-1)
+    msg = 'Bob calculates secret integer - '+str(privateKey)+'\n'
     print(msg)
     publicKey = pow(sharedData[0],privateKey,sharedData[1])
-    msg = 'Bob calculates and shares Public Key - '+str(publicKey)+'\n'
+    msg = 'Bob calculates and shares generated Key - '+str(publicKey)+'\n'
     print(msg)
     sharedData.append(publicKey)
     time.sleep(2)
@@ -72,9 +73,10 @@ def Bob():
         bobpub = sharedData[3]
     else :
         bobpub = sharedData[2]
-    msg = 'Bob receives Alices public key '+str(bobpub)+'\n'
+    msg = 'Bob receives Alices generated key '+str(bobpub)+'\n'
     print(msg)
-    sharedKey = pow(privateKey,bobpub,sharedData[1])
+    time.sleep(1)
+    sharedKey = pow(bobpub,privateKey,sharedData[1])
     msg = 'Bob calculates shared key '+str(sharedKey)+'\n'
     print(msg)
 
