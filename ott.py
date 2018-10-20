@@ -25,3 +25,17 @@ def rabinMiller(num):
                     i = i + 1
                     v = (v ** 2) % num
     return True
+
+
+
+    def Alice():
+        msg = "Alice starts the Key Exchange\n"
+        print(msg)
+        time.sleep(2)
+        sharedPrime = genPrime(40)
+        sharedModulo = random.randint(2,sharedPrime-1)
+        print("Alice sends - \nPrime to be used ",sharedPrime," Modulo - ",sharedModulo,"\n")
+        sharedData.append(sharedPrime)
+        sharedData.append(sharedModulo)
+        time.sleep(2)
+        privateKey = random.rand
