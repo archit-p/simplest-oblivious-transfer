@@ -35,6 +35,9 @@ Let's assume that Alice wants to establish a shared secret with Bob.
 6. To obtain the shared secret, Bob computes s = A^b mod p.
 ```
 The algorithm is secure because the values of a and b, which are required to derive s are not transmitted across the wire at all.
+
+### Man In The Middle Attack on DH Key Exchange
+
 ### Directory Structure
 
 ### Screenshots
