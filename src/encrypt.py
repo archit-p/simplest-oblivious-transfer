@@ -22,10 +22,14 @@ def cipher(key, message):
 
 def decipher(key, message):
     if(len(key) != len(message)):
+        print(len(key))
+        print(len(message))
         print("Sorry lengths don't match")
         return
     byte_key = codecs.decode(key, "hex")
+    print(byte_key)
     byte_message = codecs.decode(message, "hex")
+    print(byte_message)
     pt = axorb(byte_key, byte_message)
     pt = str(codecs.encode(pt, "hex"))[2:-1]
     while(pt[-1] == "0"):

@@ -13,7 +13,6 @@ def main():
     key0 = str(pow(Y, x, prime)).encode("utf-8")
     key1 = str(pow(int(Y/X), x, prime)).encode("utf-8")
     key_hashed_0 = encrypt.getHash(key0)
-    print(key_hashed_0)
     key_hashed_1 = encrypt.getHash(key1)
     cipher_0 = encrypt.cipher(key_hashed_0, m0)
     cipher_1 = encrypt.cipher(key_hashed_1, m1)
