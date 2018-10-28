@@ -1,4 +1,5 @@
 import encrypt
+import codecs
 
 bit = 0
 g = 2
@@ -15,12 +16,12 @@ def main():
     else:
         Y = X*pow(g, y, prime)
     print("Public part to send = " + str(Y))
-    key = str(pow(Y, X, prime)).encode("utf-8")
+    key = str(pow(X, y, prime)).encode("utf-8")
     key_hashed = encrypt.getHash(key)
-    cipher_0 = input("Enter cipher 0 = ")
-    cipher_1 = input("Enter cipher 1 = ")
-    m_0 = encrypt.decipher(key, cipher_0)
-    m_1 = encrypt.decipher(key, cipher_1)
+    cipher_0 = input("Cipher 0: ")
+    cipher_1 = input("Cipher 1: ")
+    m_0 = encrypt.decipher(key_hashed, cipher_0)
+    m_1 = encrypt.decipher(key_hashed, cipher_1)
     print(m_0)
     print(m_1)
 
