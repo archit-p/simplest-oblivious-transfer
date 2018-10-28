@@ -12,10 +12,10 @@ def main():
     Y = 0
     if(bit == 0):
         Y = pow(g, y, prime)
-    else: 
+    else:
         Y = X*pow(g, y, prime)
     print("Public part to send = " + str(Y))
-    key = str(pow(Y, x, prime)).encode("utf-8")
+    key = str(pow(Y, X, prime)).encode("utf-8")
     key_hashed = encrypt.getHash(key)
     cipher_0 = input("Enter cipher 0 = ")
     cipher_1 = input("Enter cipher 1 = ")
