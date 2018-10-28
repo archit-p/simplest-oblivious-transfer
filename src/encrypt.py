@@ -27,9 +27,9 @@ def decipher(key, message):
         print("Sorry lengths don't match")
         return
     byte_key = codecs.decode(key, "hex")
-    print(byte_key)
+    #print(byte_key)
     byte_message = codecs.decode(message, "hex")
-    print(byte_message)
+    #print(byte_message)
     pt = axorb(byte_key, byte_message)
     pt = str(codecs.encode(pt, "hex"))[2:-1]
     while(pt[-1] == "0"):
