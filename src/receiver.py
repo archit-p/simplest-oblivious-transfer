@@ -1,16 +1,14 @@
 import encrypt
 import codecs
-
-bit = 0
-g = 2
-prime = 7
+import requests
+import random
+import json
 
 def main():
     y = input("Enter private part: ")
     X = input("Enter public part: ")
     y = int(y)
     X = int(X)
-    Y = 0
     if(bit == 0):
         Y = pow(g, y, prime)
     else:
@@ -26,4 +24,24 @@ def main():
     print(m_1)
 
 if __name__ == "__main__":
-    main()
+    r = requests.get('http://0.0.0.0:8080')
+    g = int((r.json())['generator'])
+    prime = int((r.json())['prime'])
+    print('The prime recieved is ',prime)
+    print('The generator recieved is',g)
+    y = random.randint(2,100)
+    print('The private factor to be used by the reciever is ',y)
+    r = requests.get('http://0.0.0.0:8080/priv')
+    X = int((r.json())['public'])
+    print('The recieved public exponent is ',X)
+    bit = int(input('Enter 0 or 1 to choose message\n'))
+    if(bit == 0):
+        Y = pow(g, y, prime)
+    else:
+        Y = X*pow(g, y, prime)
+    print("Public factor to send = " + str(Y))
+    key = str(pow(X, y, prime)).encode("utf-8")
+    key_hashed = encrypt.getHash(key)
+    print('Hash of Key calculated')
+    payload=json.dumps({'Public':Y})
+    r = requests.get('http://0.0.0.0:8080/enc',data=payload)

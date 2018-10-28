@@ -38,6 +38,8 @@ The algorithm is secure because the values of a and b, which are required to der
 
 ### Man In The Middle Attack on DH Key Exchange
 
+### Simplest Oblivious Transfer Protocol
+![Image](img/ott.gif)
 ### Directory Structure
 
 ### Screenshots
