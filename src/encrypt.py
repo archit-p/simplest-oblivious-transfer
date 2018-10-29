@@ -13,6 +13,8 @@ def axorb(a, b):
         return bytes([x ^ y for (x, y) in zip(a, b[:len(a)])])
 
 def cipher(key, message):
+    message = message.encode('utf-8')
+    message = str(message.hex())
     while(len(message) < len(key)):
         message = message + "0"
     byte_key = codecs.decode(key, "hex")
@@ -34,4 +36,6 @@ def decipher(key, message):
     pt = str(codecs.encode(pt, "hex"))[2:-1]
     while(pt[-1] == "0"):
         pt = pt[0:-1]
+    pt = codecs.decode(pt,"hex")
+    pt = pt.decode("utf-8",errors='ignore')
     return pt

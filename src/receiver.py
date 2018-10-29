@@ -9,7 +9,11 @@ def initiate():
     global prime
     global y
     #Send a request to the sender
-    r = requests.get('http://0.0.0.0:8080')
+    try:
+        r = requests.get('http://0.0.0.0:8080')
+    except:
+        print("Sender program not started")
+        exit()
     #Recieve the shared prime and generator
     g = int((r.json())['generator'])
     prime = int((r.json())['prime'])
