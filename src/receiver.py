@@ -3,6 +3,10 @@ import codecs
 import requests
 import random
 import json
+http_proxy = "http://0.0.0.0:4200"
+proxyDict = {
+"http" : http_proxy
+}
 
 def initiate():
     global g
@@ -10,10 +14,9 @@ def initiate():
     global y
     #Send a request to the sender
     try:
-        r = requests.get('http://0.0.0.0:8080')
+        r = requests.get('http://0.0.0.0:8080',proxies=proxyDict)
     except:
-        print("Sender program not started")
-        exit()
+        r = requests.get('http://0.0.0.0:8080')
     #Recieve the shared prime and generator
     g = int((r.json())['generator'])
     prime = int((r.json())['prime'])
@@ -30,7 +33,11 @@ def calchash():
     global key_hashed
     global Y
     #Send a request to the sender
-    r = requests.get('http://0.0.0.0:8080/priv')
+    try:
+        r = requests.get('http://0.0.0.0:8080/priv',proxies=proxyDict)
+    except:
+        r = requests.get('http://0.0.0.0:8080/priv')
+
     #Recieve the public exponent
     X = int((r.json())['public'])
     print('The recieved public exponent is ',X,'\n')
@@ -52,7 +59,10 @@ def calchash():
 def final():
     #Send a request to the sender
     payload=json.dumps({'Public':Y})
-    r = requests.get('http://0.0.0.0:8080/enc',data=payload)
+    try:
+        r = requests.get('http://0.0.0.0:8080/enc',data=payload,proxies=proxyDict)
+    except:
+        r = requests.get('http://0.0.0.0:8080/enc',data=payload)
     #Obtain the ciphers
     cipher_0 = (r.json())['cipher_0']
     cipher_1 = (r.json())['cipher_1']
