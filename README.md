@@ -73,6 +73,29 @@ Implementing oblivious transfer using this modified Diffie-Hellman can be taken 
 7. src/receiver.py - OTT receiver
 8. src/ManinMiddle.py - OTT man in the middle
 
+### Steps to run the code
+1. Ensure python3 and [python3-pip](https://pip.pypa.io/en/stable/installing/) are installed .
+2. Run the following command
+```math
+pip install -r requirements.txt
+```
+3. Navigate to the src Directory
+4. To run the DiffieHellman
+```math
+python DiffieHellman.py
+```
+5. To run the sender
+```math
+python sender.py
+```
+6. To run the receiver
+```math
+python receiver.py
+```
+5. To run the Man in the Middle attack
+```math
+python ManinMiddle.py 
+```
 ### Screenshots
 
 Sender

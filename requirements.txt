@@ -1,0 +1,4 @@
+codecs
+hashlib
+requests
+flask
